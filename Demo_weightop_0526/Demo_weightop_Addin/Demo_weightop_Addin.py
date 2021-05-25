@@ -3,7 +3,7 @@
 
 import adsk.core, adsk.fusion, adsk.cam, traceback, csv
 
-_commandId = 'com_demo'
+_commandId = 'Demo_weightop'
 _workspaceToUse = 'FusionSolidEnvironment'
 _panelToUse = 'SolidModifyPanel'
 
@@ -47,8 +47,8 @@ def run(context):
         ui  = app.userInterface
 
 
-        commandName = 'com_demo'
-        commandDescription = 'MakeBox to a CSV (Comma Separated Values) file\n'
+        commandName = 'Demo_weightop'
+        commandDescription = 'Demo_weightop\n'
         commandResources = './resources/command'
 
         class CommandExecuteHandler(adsk.core.CommandEventHandler):
@@ -174,16 +174,6 @@ def makebox():
                 body = rootComp.bRepBodies.item(j)
                 body.copyToComponent(subOcc)
 
-        # 물리속성 가져오기 / 질량 중심
-        phypro = subOcc.getPhysicalProperties()
-        com = phypro.centerOfMass
-        # 질량중심과 원점사이 거리 구하기
-        origin = adsk.core.Point3D.create()
-        comd = int(com.distanceTo(origin))
-
-        # 딕셔너리 데이터에 질량중심 데이터 갱신
-        dict_list[0]['C'] = comd
-
         # csv 파일 작성하기_com 데이터 추가
         field = ['X', 'Y', 'Z', 'C']
         with open(csv_dir, 'w', newline='') as f:
@@ -192,7 +182,7 @@ def makebox():
             writer.writerows(dict_list)
 
         # 로컬 저장
-        folder = 'C:/Users/break/Downloads/Fusion360_script/Demo/demo_com_0514/'
+        folder = "C:/Users/break/Downloads/RLOptistruct/Demo/Demo_weightop_0526/"
 
         # Construct the output filename.
         filename = folder + 'Box'
