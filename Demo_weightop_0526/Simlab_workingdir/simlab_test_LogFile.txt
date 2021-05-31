@@ -1,0 +1,45 @@
+
+
+	--------Run Project Through Command Mode---------
+
+	----Proj Name : C:/Users/break/Downloads/RLOp_Demo/Demo_weightop_0526/Simlab_workingdir/simlab_test.py----
+
+
+UnitSystem---------------------------------------- Passed
+
+NewDocument--------------------------------------- Passed
+
+UnitSystem---------------------------------------- Passed
+
+STEP_Import--------------------------------------- Passed
+
+Auto Hex Mesh------------------------------------- Passed
+
+CreateSolution------------------------------------ Passed
+
+BodyMergeRightClick------------------------------- Passed
+
+AssignMaterial------------------------------------ Passed
+
+DropTestParameters-------------------------------- Passed
+
+Force and Moment---------------------------------- Passed
+
+Fixed Constraint---------------------------------- Passed
+
+ExportOptions------------------------------------- Passed
+
+CreateResponseNew--------------------------------- Passed
+
+Export and Solve---------------------------------- Passed
+
+ExportResponses----------------------------------- Passed
+
+ExportMassProperties------------------------------ Passed
+ Mass properties exported successfully.
+
+ExportSlb----------------------------------------- Passed
+
+CloseActiveDocument------------------------------- Passed
+
+	--------Run Project Through Command Mode Completed---------

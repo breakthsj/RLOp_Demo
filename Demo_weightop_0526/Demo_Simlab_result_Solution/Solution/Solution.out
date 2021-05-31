@@ -1,0 +1,232 @@
+ ************************************************************************
+ **                                                                    **
+ **                                                                    **
+ **                     Altair OptiStruct(TM) 2020                     **
+ **                                                                    **
+ **             Advanced Engineering Analysis, Design and              **
+ **        Optimization Software from Altair Engineering, Inc.         **
+ **                                                                    **
+ **                                                                    **
+ **             Windows 10  (Build 9200)  DESKTOP-GR4258B              **
+ **            24 CPU:  AMD Ryzen 9 5900X 12-Core Processor            **
+ **                    37135 MB RAM,  56268 MB swap                    **
+ **                                                                    **
+ ** Build: 1016781c0133200_Ce64RB68UH14M:175184-000  60040000000200040 **
+ ************************************************************************
+ **  COPYRIGHT (C) 1996-2020                 Altair Engineering, Inc.  **
+ ** All Rights Reserved.  Copyright notice does not imply publication. **
+ **         Contains trade secrets of Altair Engineering, Inc.         **
+ ** Decompilation or disassembly of this software strictly prohibited. **
+ ************************************************************************
+ 
+  
+ NOTE # 9199
+ MSGLMT=STRICT is active, all messages will be printed.
+ You can suppress some less important warning messages by use of
+  MSGLMT=BRIEF or UNREF (in config file or in the input data).
+  
+ NOTE # 1929
+ Created RAM scratch area: total size 30 MB.
+  
+ *** WARNING # 1200
+ Incorrect or inconsistent data found in $HMxx cards.
+  (Obsolete data format or problems because of manual editing.).
+  All HyperMesh specific data will be skipped from input files.
+  Component information in the output file will be missing.
+  To rebuild this information - read back and recreate input file
+  using HyperMesh.  This happened in line 1907 of file 
+	"Solution.fem":
+ $HMNAME PROP               1 "SLBody_3" 5
+  
+  
+  
+ *** INFORMATION # 4739
+ The structure of surface-to-surface contact element is quite different than
+ that of node-to-surface contact element. No internal CGAP/CGAPG elements are
+ created for surface-to-surface contact.
+  
+ Characteristic edge length of CONTACT/TIE        2 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE        3 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE        4 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE        5 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE        6 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE        7 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE        8 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE        9 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE       10 is  5.0000E-03
+ Characteristic edge length of CONTACT/TIE       11 is  5.0000E-03
+ 
+
+************************************************************************
+
+OPTIMIZATION FILE AND PARAMETER INFORMATION :
+---------------------------------------------
+
+  FEM model file               : Solution.fem
+  Output files prefix          : Solution
+  Model read from files:
+ (*1)	    Solution.fem
+
+************************************************************************
+
+ 
+
+************************************************************************
+
+FINITE ELEMENT MODEL DATA INFORMATION :
+---------------------------------------
+
+  Total # of Grids (Structural)        :       945
+  Total # of Elements Excluding Contact:       392
+  Total # of S2S Contact Elements (3D) :        90 (no internally created CGAPG)
+  Total # of Degrees of Freedom        :      2592
+  (Structural)
+  Total # of Non-zero Stiffness Terms  :     68634
+
+ 
+  Element Type Information
+  ------------------------
+
+   CHEXA    Elements   :      392
+
+  Load and Boundary Information
+  -----------------------------
+
+   FORCE Sets        :         2
+   SPC   Sets        :         2
+
+  Material and Property Information
+  ---------------------------------
+
+   PSOLID Cards      :         3
+   MAT1   Cards      :         2
+
+  S2S Contact Element Connectivity Information
+  --------------------------------------------
+
+   Average # of nodes per element  :        10
+   Maximum # of nodes per element  :        18
+
+************************************************************************
+
+ 
+
+************************************************************************
+
+OPTIMIZATION PROBLEM PARAMETERS :
+---------------------------------
+
+ NO DESIGN MATERIAL OR DESIGN VARIABLES FOUND  : ANALYSIS ONLY
+
+   ------------------------
+   Static Subcase Summary :
+   ------------------------
+
+   ----------   --------  -------  --------------------- 
+   Subcase ID    SPC ID   LOAD ID  Preloading Subcase ID
+   ----------   --------  -------  --------------------- 
+        1           16         15
+   ----------   --------  -------  --------------------- 
+
+   Run Type                        :   Analysis Only (No design elements)
+   Run at location                 : C:/Users/break/AppData/Local/Temp/SimLab/SimLab_2021/Temp/temp_17/SolverRun/Solution/
+   Scratch file directory          : C:/Users/break/AppData/Local/Temp/SimLab/SimLab_2021/Temp/temp_17/SolverRun/Solution/
+                                     Free space:   361.664 GB
+   Number of CPU processors        :         24
+
+
+************************************************************************
+
+ 
+
+************************************************************************
+
+MEMORY ESTIMATION INFORMATION :
+-------------------------------
+
+ Solver Type is:  Sparse-Matrix Solver
+                  Direct Method
+ 
+ Memory (RAM) Allocated in Preprocessor                  :     800 MB
+   In addition a ramdisk area was allocated in memory    :      30 MB
+ Estimated Memory (RAM) for Out of Core Solution         :      23 MB
+ Estimated Memory (RAM) for In-Core Solution             :      23 MB
+ (Note: The Minimum Memory Requirement is limited by Assembly Module.)       
+ 
+DISK SPACE ESTIMATION INFORMATION :
+-----------------------------------
+
+ Estimated Disk Space for Output Data Files              :       4 MB
+ Estimated Scratch Disk Space for In-Core Solution       :       3 MB
+ Estimated Scratch Disk Space for Out of Core Solution   :       5 MB
+
+************************************************************************
+
+
+BEGINNING ANALYSIS SOLUTION ....
+
+
+************************************************************************
+
+ANALYSIS RESULTS :
+------------------
+
+  
+ITERATION   0
+  
+ (Scratch disk space usage for starting iteration = 2 MB)
+  
+ *** WARNING # 5629
+ In static load case 1,
+ The magnitude of Residual Energy Ratio, 7.47412, is large (larger than 10%).
+ The results for this subcase may not be correct.
+  
+ *** WARNING # 312
+ In static load case 1 
+ the compliance is negative or large 4.13664e+09.
+ Optimization/buckling analysis cannot be performed.
+ due to possible rigid body mode.
+(Running in-core solution)
+
+Volume                              =  4.90000E-05   Mass     =  2.98290E-01
+
+ Subcase   Compliance     Epsilon
+       1  4.136637E+09  7.474124E+00
+
+Note : Epsilon = Residual Strain Energy Ratio.
+
+
+************************************************************************
+  
+ ANALYSIS COMPLETED.
+  
+
+************************************************************************
+
+RESOURCE USAGE INFORMATION
+--------------------------
+
+ MAXIMUM MEMORY USED                                       800 MB
+   IN ADDITION     30 MB RAMDISK AREA WAS ALLOCATED IN MEMORY
+ MAXIMUM DISK SPACE USED                                     1 MB
+
+************************************************************************
+
+
+************************************************************************
+
+COMPUTE TIME INFORMATION
+------------------------
+
+ EXECUTION STARTED                         Tue Jun 01 00:14:16 2021    
+ EXECUTION COMPLETED                       Tue Jun 01 00:14:20 2021    
+ ELAPSED TIME                                         00:00:04
+ CPU TIME                                             00:00:10
+
+************************************************************************
+
+  
+                        ***** END OF REPORT *****
+  
+ For Useful OptiStruct Tips and Tricks, go to the URL:
+ http://www.altairhyperworks.com/tips.aspx

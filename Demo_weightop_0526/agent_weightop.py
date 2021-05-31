@@ -6,7 +6,12 @@ from env_weightop import Env
 import tensorflow as tf
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
+import time
 
+# gpu 상태 점검 / vram 50% 할당
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.5
+session = tf.compat.v1.Session(config=config)
 
 
 # 상태가 입력, 각 행동의 확률이 출력인 인공신경망 생성
@@ -96,8 +101,9 @@ if __name__ == "__main__":
 
     scores, episodes = [], []
 
-    EPISODES = 200
+    EPISODES = 300
     for e in range(EPISODES):
+        start_time = time.time()
         done = False
         score = 0
         # env 초기화
@@ -114,15 +120,17 @@ if __name__ == "__main__":
 
             agent.append_sample(state, action, reward)
             score += reward
-
             state = next_state
 
             if done:
+                # 에피소드마다 걸린 시간 측정
+                end_time = time.time()
+                spend_time = float(end_time-start_time)
                 # 에피소드마다 정책신경망 업데이트
                 entropy = agent.train_model()
                 # 에피소드마다 학습 결과 출력
-                print("episode: {:3d} | score: {:3d} | entropy: {:.3f}".format(
-                    e, score, entropy))
+                print("episode: {:3d} | score: {:3d} | entropy: {:.3f} | time(s): {:.3f}".format(
+                    e, score, entropy, spend_time))
 
                 scores.append(score)
                 episodes.append(e)

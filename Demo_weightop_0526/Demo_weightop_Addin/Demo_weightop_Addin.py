@@ -172,7 +172,7 @@ def makebox():
         # subOcc = occurrences.addNewComponent(adsk.core.Matrix3D.create())
 
         # csv 파일 받아오기
-        csv_dir = r"C:\Users\break\Downloads\RLOptistruct\Demo\Demo_weightop_0526\Demo_weightop.csv"
+        csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_weightop.csv"
         with open(csv_dir, 'r') as f:
             reader = csv.DictReader(f)
             dict_list = []
@@ -196,7 +196,7 @@ def makebox():
         #         body.copyToComponent(subOcc)
 
         # 로컬 저장
-        folder = "C:/Users/break/Downloads/RLOptistruct/Demo/Demo_weightop_0526/"
+        folder = "C:/Users/break/Downloads/RLOp_Demo/Demo_weightop_0526/"
 
         # Construct the output filename.
         filename = folder + 'Box'
