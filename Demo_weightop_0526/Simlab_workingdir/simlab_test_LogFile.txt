@@ -17,7 +17,8 @@ Auto Hex Mesh------------------------------------- Passed
 
 CreateSolution------------------------------------ Passed
 
-BodyMergeRightClick------------------------------- Passed
+BodyMergeRightClick------------------------------- Failed
+ Select at least two bodies from the model.
 
 AssignMaterial------------------------------------ Passed
 

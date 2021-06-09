@@ -17,6 +17,8 @@ class Env:
         self.action_size = len(self.action_space)
         self.episode = 0
         self.counter = 0
+        self.SET = 1
+        self.minweight = 0
 
         # 실행중 프로세스 받아오기
         procs = pywinauto.findwindows.find_elements()
@@ -32,6 +34,13 @@ class Env:
 
         # dialog 연결
         self.dig = app['{}'.format(proc.name)]
+
+        # 비교값 초기설정 0,0
+        # 이전 stress, weight 리셋
+        csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_compare.csv"
+        with open(csv_dir, 'w', newline='') as f:
+            reader = csv.writer(f)
+            reader.writerow([0, 0])
 
 
     # def set_reward(self, state):
@@ -56,12 +65,6 @@ class Env:
             writer.writeheader()
             writer.writerows(s_)
 
-        # 이전 stress, weight 리셋
-        csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_compare.csv"
-        with open(csv_dir, 'w', newline='') as f:
-            reader = csv.writer(f)
-            reader.writerow([0, 0])
-
         return self.get_state()
 
     def step(self, action):
@@ -74,7 +77,7 @@ class Env:
         self.move(state, action)
 
         # 완료여부, 리워드 설정
-        if self.counter >= 64:
+        if self.counter >= 25:
             done = True
             reward = self.simlab()
         else:
@@ -99,13 +102,16 @@ class Env:
         pywinauto.keyboard.send_keys("{VK_SHIFT down}S""{VK_SHIFT up}")
 
         # 생성 위치 이동
-        if self.counter % 16 == 0:
+        # if self.counter % 16 == 0:
+        #     state[0] = 0
+        #     state[1] = 0
+        #     state[2] += 1
+        # elif self.counter % 4 == 0:
+        #         state[0] = 0
+        #         state[1] += 1
+        if self.counter % 5 == 0:
             state[0] = 0
-            state[1] = 0
-            state[2] += 1
-        elif self.counter % 4 == 0:
-                state[0] = 0
-                state[1] += 1
+            state[1] += 1
         else:
             state[0] += 1
 
@@ -148,8 +154,9 @@ class Env:
         self.episode += 1
         print("백그라운드SimLab 실행중...{}".format(self.episode))
         simlab_dir = "\"C:\Program Files\Altair\\2021\SimLab2021\\bin\win64\SimLab.bat\""
-        simscript_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Simlab_workingdir\simlab_test.py"
+        simscript_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Simlab_workingdir_modi\simlab_moditest.py"
         os.system(simlab_dir + ' -auto ' + simscript_dir + ' -nographics')
+        # os.system(simlab_dir + ' -auto ' + simscript_dir)
 
         # CAE결과를 받아온다 / 무게, 응력
         csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\demo_simlabstress.csv"
@@ -177,11 +184,34 @@ class Env:
                 dict_list.append(elemt)
         pre_stress = float(dict_list[0][0])
         pre_weight = float(dict_list[0][1])
-        reward = -1
-        if pre_stress > stress:
-            reward += 1
-        if pre_weight > weight:
-            reward += 1
+
+        # 최소 무게 설정
+        if self.SET:
+            if stress <= 40:
+                self.minweight = weight
+                self.SET = 0
+
+        # 리워드 설정
+        reward = 0
+        if weight == 0:
+            reward = -10
+        elif stress <= 40:
+            reward = 5
+            if self.minweight >= weight:
+                reward += 10
+                self.minweight = weight
+                os.replace(r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_Simlab_result.slb", r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_Simlab_optishape.slb")
+            elif self.minweight*1.1 >= weight:
+                reward += 4
+            elif self.minweight*1.2 >= weight:
+                reward += 2
+            elif self.minweight*1.4 >= weight:
+                reward += 1
+        else:
+            reward = -int(stress - 40)
+
+        #현재 상태 출력
+        print("모델 응력 : {:.3f}Mpa | 모델 무게 : {:.3f}kg | 현재 무게 최저치 : {:.3f}kg".format(stress, weight, self.minweight))
 
         # csv 파일 작성하기_새로운 stress, weight에 대한
         csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_compare.csv"

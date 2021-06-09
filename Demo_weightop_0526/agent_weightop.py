@@ -98,10 +98,9 @@ if __name__ == "__main__":
     action_space = [0, 1]
     action_size = len(action_space)
     agent = REINFORCEAgent(state_size, action_size)
-
     scores, episodes = [], []
 
-    EPISODES = 300
+    EPISODES = 500
     for e in range(EPISODES):
         start_time = time.time()
         done = False
@@ -129,7 +128,7 @@ if __name__ == "__main__":
                 # 에피소드마다 정책신경망 업데이트
                 entropy = agent.train_model()
                 # 에피소드마다 학습 결과 출력
-                print("episode: {:3d} | score: {:3d} | entropy: {:.3f} | time(s): {:.3f}".format(
+                print("episode: {:3d} | score: {:1f} | entropy: {:.3f} | time(s): {:.3f}".format(
                     e, score, entropy, spend_time))
 
                 scores.append(score)

@@ -1,4 +1,4 @@
 (SimLab) : Begin Initialize..
 
 **********Model Definition Block..**********
-(SimLab) : Model(SimLab) : Number of Nodes  : 945
+(SimLab) : Model(SimLab) : Number of Nodes  : 79849

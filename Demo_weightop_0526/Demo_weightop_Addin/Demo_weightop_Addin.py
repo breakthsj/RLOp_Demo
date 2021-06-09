@@ -161,8 +161,8 @@ def makebox():
             bodies = rootComp.bRepBodies
 
             # plate 생성
-            bodies.add(makeplate(4, 4, 1, 1.5, 1.5, -1.0))
-            bodies.add(makeplate(4, 4, 1, 1.5, 1.5, 4))
+            bodies.add(makeplate(5, 5, 1, 2.0, 2.0, -1.0))
+            bodies.add(makeplate(5, 5, 1, 2.0, 2.0, 1))
 
         # Get the root component of the active design.
         rootComp = design.rootComponent
@@ -206,8 +206,8 @@ def makebox():
         stpOptions = exportMgr.createSTEPExportOptions(filename, rootComp)
         exportMgr.execute(stpOptions)
 
-        # 끝점(3,3,3)에 도달하면 doc 삭제
-        if int(dict_list[0]['X']) + int(dict_list[0]['Y']) + int(dict_list[0]['Z']) == 9:
+        # 끝점(4,4,0)에 도달하면 doc 삭제
+        if int(dict_list[0]['X']) + int(dict_list[0]['Y']) + int(dict_list[0]['Z']) == 8:
             app.documents.item(1).close(saveChanges=False)
 
     except:
