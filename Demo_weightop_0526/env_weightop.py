@@ -13,7 +13,7 @@ np.random.seed(1)
 class Env:
     def __init__(self):
         super(Env, self).__init__()
-        self.action_space = ['NG', 'G',]
+        self.action_space = ['NG', 'G']
         self.action_size = len(self.action_space)
         self.episode = 0
         self.counter = 0
@@ -200,7 +200,8 @@ class Env:
             if self.minweight >= weight:
                 reward += 10
                 self.minweight = weight
-                os.replace(r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_Simlab_result.slb", r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_Simlab_optishape.slb")
+                os.replace(r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_Simlab_result.slb",
+                           r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_Simlab_optishape.slb")
             elif self.minweight*1.1 >= weight:
                 reward += 4
             elif self.minweight*1.2 >= weight:

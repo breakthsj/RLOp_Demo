@@ -59,6 +59,9 @@ class DQNAgent:
         self.target_model = DQN(action_size)
         self.optimizer = Adam(lr=self.learning_rate)
 
+        # # Continue learning
+        # self.model.load_weights("./save_model/trained/model")
+
         # 타깃 모델 초기화
         self.update_target_model()
 
@@ -120,11 +123,12 @@ if __name__ == "__main__":
     state_size = 4
     action_space = [0, 1]
     action_size = len(action_space)
+
     agent = DQNAgent(state_size, action_size)
     scores, episodes = [], []
     score_avg = 0
 
-    EPISODES = 500
+    EPISODES = 1000
     for e in range(EPISODES):
         start_time = time.time()
         done = False

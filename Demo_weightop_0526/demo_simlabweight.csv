@@ -1,5 +1,4 @@
 
 #Calculated Body Mass Properties
 Body,Density,Shell Thickness,Cross Section,Volume,Mass,CG-X,CG-Y,CG-Z,Ixx,Iyy,Izz,Ixy,Iyz,Izx,I1,I2,I3,
-SLBody_3,2.770000e-06 kg/mm3,0.000000e+00 mm,0.000000e+00 mm2,1.700000e+04 mm3,4.709000e-02 kg,2.176471e+01 mm,2.470588e+01 mm,2.210308e-16 mm,6.390010e+00 kg*mm2,1.088719e+01 kg*mm2,1.649236e+01 kg*mm2,-1.629412e-01 kg*mm2,1.889475e-17 kg*mm2,2.519300e-17 kg*mm2,1.649236e+01 kg*mm2,1.089308e+01 kg*mm2,6.384114e+00 kg*mm2,
-Overall Values,0.000000e+00 kg/mm3,0.000000e+00 mm,0.000000e+00 mm2,1.700000e+04 mm3,4.709000e-02 kg,2.176471e+01 mm,2.470588e+01 mm,2.210308e-16 mm,6.390010e+00 kg*mm2,1.088719e+01 kg*mm2,1.649236e+01 kg*mm2,-1.629412e-01 kg*mm2,1.889475e-17 kg*mm2,2.519300e-17 kg*mm2,1.649236e+01 kg*mm2,1.089308e+01 kg*mm2,6.384114e+00 kg*mm2,
+Overall Values,0.000000e+00 kg/mm3,0.000000e+00 mm,0.000000e+00 mm2,0.000000e+00 mm3,0.000000e+00 kg,0.000000e+00 mm,0.000000e+00 mm,0.000000e+00 mm,0.000000e+00 kg*mm2,0.000000e+00 kg*mm2,0.000000e+00 kg*mm2,0.000000e+00 kg*mm2,0.000000e+00 kg*mm2,0.000000e+00 kg*mm2,0.000000e+00 kg*mm2,0.000000e+00 kg*mm2,0.000000e+00 kg*mm2,
