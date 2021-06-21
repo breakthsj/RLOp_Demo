@@ -212,7 +212,7 @@ def makebox():
 
     except:
         if ui:
-            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+            ui.messageBox('Failed:\n{} \nGcord :\n{}'.format(traceback.format_exc(), dict_list))
 
 
 def makeCell(X,Y,Z):

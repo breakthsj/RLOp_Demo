@@ -48,7 +48,7 @@ class DQNAgent:
         self.epsilon = 1.0
         self.epsilon_decay = 0.999
         self.epsilon_min = 0.01
-        self.batch_size = 64
+        self.batch_size = 256
         self.train_start = 1000
 
         # 리플레이 메모리, 최대 크기 2000
@@ -120,7 +120,7 @@ class DQNAgent:
 if __name__ == "__main__":
     # 환경과 에이전트 생성
     env = Env()
-    state_size = 4
+    state_size = 25
     action_space = [0, 1]
     action_size = len(action_space)
 
@@ -154,6 +154,8 @@ if __name__ == "__main__":
                 agent.train_model()
 
             state = next_state
+
+            # print(state)
 
             if done:
                 # 에피소드마다 걸린 시간 측정

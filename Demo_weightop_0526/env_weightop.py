@@ -20,6 +20,10 @@ class Env:
         self.SET = 1
         self.minweight = 0
 
+        # 0620 state modified / real state : generated cor
+        self.realstate = np.zeros(25)
+        self.gcord = [0, 0, 0, 0]
+
         # 실행중 프로세스 받아오기
         procs = pywinauto.findwindows.find_elements()
 
@@ -56,25 +60,30 @@ class Env:
     def reset(self):
         self.counter = 0
 
-        # 0,0,0,0 으로 리셋
-        s_ = [{'X': 0, 'Y': 0, 'Z': 0, 'G': 0}]
-        csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_weightop.csv"
-        field = ['X', 'Y', 'Z', 'G']
-        with open(csv_dir, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=field)
-            writer.writeheader()
-            writer.writerows(s_)
+        # # 0,0,0,0 으로 리셋
+        # s_ = [{'X': 0, 'Y': 0, 'Z': 0, 'G': 0}]
+        # csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_weightop.csv"
+        # field = ['X', 'Y', 'Z', 'G']
+        # with open(csv_dir, 'w', newline='') as f:
+        #     writer = csv.DictWriter(f, fieldnames=field)
+        #     writer.writeheader()
+        #     writer.writerows(s_)
 
-        return self.get_state()
+        # 0620 state modified / real state : generated cor
+        self.realstate = np.zeros(25)
+        self.gcord = [0, 0, 0, 0]
+
+        return self.realstate
+        # return self.get_state()
 
     def step(self, action):
         self.counter += 1
 
-        # state를 받아옴
-        state = self.get_state()
+        # # state를 받아옴
+        # state = self.get_state()
 
-        # 액션에 따라 움직임
-        self.move(state, action)
+        # 액션에 따라 움직임 / modified state 0620
+        self.realstate = self.move(action)
 
         # 완료여부, 리워드 설정
         if self.counter >= 25:
@@ -85,17 +94,27 @@ class Env:
             reward = 0
         # reward = self.set_reward(state)
 
-        s_ = self.get_state()
+        # # 0620 state modified / real state : generated cor
+        s_ = self.realstate
+        # s_ = self.get_state()
 
         return s_, reward, done
 
-    def move(self, state, action):
+    def move(self, action):
         # 액션에 따라 생성 할지 안할지 결정
-        state[3] = action
-        # if action == 0:  # +x
-        #     state[3] = 0
-        # elif action == 1:  # -x
-        #     state[3] = 1
+        self.gcord[3] = action
+
+        # Fusino360 에게 넘겨줄 csv데이터 생성
+        gcord = [{'X': self.gcord[0], 'Y': self.gcord[1], 'Z': self.gcord[2], 'G':self.gcord[3]}]
+        csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_weightop.csv"
+        field = ['X', 'Y', 'Z', 'G']
+        with open(csv_dir, 'w', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=field)
+            writer.writeheader()
+            writer.writerows(gcord)
+
+        # 디버그용 프린트
+        # print(self.gcord)
 
         # fusion360 모델 생성
         self.dig.set_focus()
@@ -110,44 +129,40 @@ class Env:
         #         state[0] = 0
         #         state[1] += 1
         if self.counter % 5 == 0:
-            state[0] = 0
-            state[1] += 1
+            self.gcord[0] = 0
+            self.gcord[1] += 1
         else:
-            state[0] += 1
+            self.gcord[0] += 1
 
-        s_ = [{'X': state[0], 'Y': state[1], 'Z': state[2], 'G':state[3]}]
+        # # 0620 state modified / real state : generated cor
+        if action:
+            self.realstate[(self.counter-1)] = 1
 
-        # csv 파일 작성하기_새로운 액션에 대한
-        csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_weightop.csv"
-        field = ['X', 'Y', 'Z', 'G']
-        with open(csv_dir, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=field)
-            writer.writeheader()
-            writer.writerows(s_)
+        return self.realstate
 
-    def get_state(self):
-        # csv 파일 받아오기_state
-        csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_weightop.csv"
-        with open(csv_dir, 'r') as f:
-            reader = csv.DictReader(f)
-            dict_list = []
-            for elemt in reader:
-                dict_list.append(elemt)
-        if dict_list == []:
-            print("빈 리스트")
-        # # csv 파일 받아오기_state_pandas
-        # csv_dir = r"C:\Users\break\Downloads\Fusion360_script\Demo\demo_com_0514\demo_com.csv"
-        # data = pd.read_csv(csv_dir)
-
-        X = int(dict_list[0]['X'])
-        Y = int(dict_list[0]['Y'])
-        Z = int(dict_list[0]['Z'])
-        G = int(dict_list[0]['G'])
-
-        # state설정
-        state = [X, Y, Z, G]
-
-        return state
+    # def get_state(self):
+    #     # csv 파일 받아오기_state
+    #     csv_dir = r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_weightop.csv"
+    #     with open(csv_dir, 'r') as f:
+    #         reader = csv.DictReader(f)
+    #         dict_list = []
+    #         for elemt in reader:
+    #             dict_list.append(elemt)
+    #     if dict_list == []:
+    #         print("빈 리스트")
+    #     # # csv 파일 받아오기_state_pandas
+    #     # csv_dir = r"C:\Users\break\Downloads\Fusion360_script\Demo\demo_com_0514\demo_com.csv"
+    #     # data = pd.read_csv(csv_dir)
+    #
+    #     X = int(dict_list[0]['X'])
+    #     Y = int(dict_list[0]['Y'])
+    #     Z = int(dict_list[0]['Z'])
+    #     G = int(dict_list[0]['G'])
+    #
+    #     # state설정
+    #     state = [X, Y, Z, G]
+    #
+    #     return state
 
     def simlab(self):
         # 심랩을 백그라운드에서 실행
@@ -202,14 +217,18 @@ class Env:
                 self.minweight = weight
                 os.replace(r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_Simlab_result.slb",
                            r"C:\Users\break\Downloads\RLOp_Demo\Demo_weightop_0526\Demo_Simlab_optishape.slb")
-            elif self.minweight*1.1 >= weight:
+            elif self.minweight*1.3 >= weight:
+                reward += 8
+            elif self.minweight*1.6 >= weight:
+                reward += 6
+            elif self.minweight*2.0 >= weight:
                 reward += 4
-            elif self.minweight*1.2 >= weight:
-                reward += 2
-            elif self.minweight*1.4 >= weight:
-                reward += 1
+            elif self.minweight*2.5 <= weight:
+                reward -= 4
+            elif self.minweight*3.0 <= weight:
+                reward -= 8
         else:
-            reward = -int(stress - 40)
+            reward = -10
 
         #현재 상태 출력
         print("모델 응력 : {:.3f}Mpa | 모델 무게 : {:.3f}kg | 현재 무게 최저치 : {:.3f}kg".format(stress, weight, self.minweight))
