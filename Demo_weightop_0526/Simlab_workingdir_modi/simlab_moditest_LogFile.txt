@@ -11,4 +11,43 @@ NewDocument--------------------------------------- Passed
 
 UnitSystem---------------------------------------- Passed
 
-STEP_Import---------------------------------------
+STEP_Import--------------------------------------- Passed
+
+Auto Hex Mesh------------------------------------- Passed
+
+BodyMergeRightClick------------------------------- Failed
+
+CreateSolution------------------------------------ Passed
+
+ExportOptions------------------------------------- Passed
+
+AssignMaterial------------------------------------ Passed
+
+AssignMaterial------------------------------------ Failed
+ Select any body to assign material.
+
+Define Contact------------------------------------ Failed
+ Please select two bodies or two faces or 2 nodes to create a contact.
+
+Define Contact------------------------------------ Failed
+ Please select two bodies or two faces or 2 nodes to create a contact.
+
+Force and Moment---------------------------------- Passed
+
+Fixed Constraint---------------------------------- Passed
+
+CreateResponseNew--------------------------------- Failed
+ No entity or set is selected.
+Select entities or sets.
+
+Export and Solve---------------------------------- Passed
+
+ExportMassProperties------------------------------ Passed
+ Mass properties exported successfully.
+
+ExportResponses----------------------------------- Failed
+ Responses are not defined for this solution.
+
+ExportSlb----------------------------------------- Passed
+
+	--------Run Project Through Command Mode Completed---------

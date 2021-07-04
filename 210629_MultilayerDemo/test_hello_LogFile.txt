@@ -1,0 +1,8 @@
+
+
+	--------Run Project Through Command Mode---------
+
+	----Proj Name : C:/Users/break/Downloads/RLOp_Demo/210629_MultilayerDemo/test_hello.py----
+
+
+	--------Run Project Through Command Mode Completed---------
